@@ -1,5 +1,9 @@
 <template>
 	<view>
+		<!-- 搜索组件 -->
+		<view class="search-box">
+			<my-search @click="gotoSearch"></my-search>
+		</view>
 		<!-- 轮播图区域 -->
 		<!-- usw 快捷生成  circular到最后一张图片再回到第一张-->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1500" :circular="true">
@@ -106,6 +110,11 @@
 					})
 				})
 				this.floorList = res.message;
+			},
+			gotoSearch(){
+				uni.navigateTo({
+					url:'/subpkg/search/search'
+				})
 			}
 		}
 	}
@@ -140,5 +149,10 @@ swiper{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
+}
+.search-box{
+	position: sticky;
+	top:0;
+	z-index: 999;
 }
 </style>
