@@ -21,6 +21,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "subpkg/goods_list/goods_list",
+          "pathName": "subpkg/goods_list/goods_list",
+          "query": "query=热",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

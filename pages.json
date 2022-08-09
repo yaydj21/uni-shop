@@ -47,7 +47,11 @@
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
+                    "enablePullDownRefresh": false,
+					// 触底距离 当滚动条距离页面底部不足150时触发上拉触底事件
+					"onReachBottomDistance": 150,
+					"enablePullDownRefresh":true,
+					"backgroundColor": "#F8F8F8"
                 }
                 
                 }
