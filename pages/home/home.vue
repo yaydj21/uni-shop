@@ -49,7 +49,9 @@
 </template>
 
 <script>
+	import badgeMix from '@/mixins/tarbar-badge.js';
 	export default {
+		mixins:[badgeMix],
 		data() {
 			return {
 				// 轮播图数据列表

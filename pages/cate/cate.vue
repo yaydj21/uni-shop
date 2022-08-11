@@ -36,7 +36,10 @@
 </template>
 
 <script>
+	// mixin 导入后 调用 数据 方法 计算属性都会在这里生效 提高代码维护性和复用性。
+	import badgeMix from '@/mixins/tarbar-badge.js';
 	export default {
+		mixins:[badgeMix],
 		data() {
 			return {
 				// 当前设备可用宽度

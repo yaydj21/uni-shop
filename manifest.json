@@ -61,7 +61,10 @@
             "scope.userLocation" : {
                 "desc" : ""
             }
-        }
+        },
+		"requiredPrivateInfos":[
+			"chooseAddress"
+		]
     },
     "vueVersion" : "2"
 }

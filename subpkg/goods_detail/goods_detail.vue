@@ -45,7 +45,32 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapGetters
+	} from 'vuex';
 	export default {
+		computed: {
+			// 映射m_cart模块中的total属性
+			...mapState('m_cart', []),
+			...mapGetters('m_cart', ['total']),
+		},
+		watch: {
+			// 监听total值的变化，通过形参得到变化后的新值
+			total: {
+				handler(newVal) {
+					// find方法找到购物车按钮的对象
+					const findResult = this.options.find(x => x.text === '购物车');
+					// 如果findResult存在 就为info赋新值
+					if (findResult) {
+						findResult.info = newVal;
+					}
+				},
+				// immediate 让页面初次加载完毕后立即调用。
+				immediate: true,
+			}
+		},
 		data() {
 			return {
 				goods_info: {},
@@ -57,7 +82,7 @@
 				}, {
 					icon: 'cart',
 					text: '购物车',
-					info: 2
+					info: 0
 				}],
 				buttonGroup: [{
 						text: '加入购物车',
@@ -77,6 +102,8 @@
 			this.getGoodsDetail(goods_id);
 		},
 		methods: {
+			// （模块,映射的方法)
+			...mapMutations('m_cart', ['addToCart']),
 			async getGoodsDetail(goods_id) {
 				const [, {
 					data: res
@@ -104,11 +131,27 @@
 					urls: this.goods_info.pics.map(x => x.pics_big)
 				})
 			},
-			onClick(e){
-				if(e.content.text === '购物车'){
+			onClick(e) {
+				if (e.content.text === '购物车') {
 					uni.switchTab({
-						url:'/pages/cart/cart'
+						url: '/pages/cart/cart'
 					})
+				}
+			},
+			buttonClick(e) {
+				if (e.content.text === '加入购物车') {
+					// 组织商品的信息对象
+					//{ goods_id, goods_name, goods_price, goods_count, goods_small_logo, goods_state }
+					const goods = {
+						goods_id: this.goods_info.goods_id,
+						goods_name: this.goods_info.goods_name,
+						goods_price: this.goods_info.goods_price,
+						goods_count: 1,
+						goods_small_logo: this.goods_info.goods_small_logo,
+						goods_state: true,
+					}
+					//调用addToCart方法
+					this.addToCart(goods);
 				}
 			}
 		}

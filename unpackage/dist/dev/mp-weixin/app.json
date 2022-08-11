@@ -55,5 +55,8 @@
       "desc": ""
     }
   },
+  "requiredPrivateInfos": [
+    "chooseAddress"
+  ],
   "usingComponents": {}
 }

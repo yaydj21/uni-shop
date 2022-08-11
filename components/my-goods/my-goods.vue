@@ -2,6 +2,7 @@
 	<view class="goods-item">
 		<!-- 左侧盒子 -->
 		<view class="goods-item-left">
+			<radio :checked="goods.goods_state" color='#C00000' v-if="showRadio" @click="radioClickHandler"></radio>
 			<image :src="goods.goods_small_logo || defaultPic" class="goods-pic"></image>
 		</view>
 		<!-- 右侧盒子 -->
@@ -11,6 +12,8 @@
 			<view class="goods-info-box">
 				<!-- |管道符调用过滤器 -->
 				<view class="goods-price">￥{{goods.goods_price | tofixed}}</view>
+				<uni-number-box :min="1" :value="goods.goods_count" v-if="showNum" @change="numChangeHandler">
+				</uni-number-box>
 			</view>
 		</view>
 	</view>
@@ -23,6 +26,15 @@
 			goods: {
 				type: Object,
 				default: {}
+			},
+			showRadio: {
+				type: Boolean,
+				// 默认情况下不会展示radio组件
+				default: false
+			},
+			showNum: {
+				type: Boolean,
+				default: false
 			}
 		},
 		data() {
@@ -36,17 +48,38 @@
 			tofixed(num) {
 				return Number(num).toFixed(2);
 			}
+		},
+		methods: {
+			// 这是radio组件的点击事件
+			radioClickHandler() {
+				this.$emit('radio-change', {
+					goods_id: this.goods.goods_id,
+					goods_state: !this.goods.goods_state
+				})
+			},
+			// 监听到了Numberbox组件数量变化的事件
+			numChangeHandler(val) {
+				this.$emit('num-change', {
+					goods_id: this.goods.goods_id,
+					goods_count: +val //+号隐式转换成数字类型
+				});
+			}
 		}
 	}
 </script>
 
 <style lang="scss">
 	.goods-item {
+		width: 750rpx;
+		box-sizing: border-box;
 		display: flex;
 		padding: 10px 5px;
 		border-bottom: 1px solid #f0f0f0;
 
 		.goods-item-left {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
 			margin-right: 5px;
 
 			.goods-pic {
@@ -58,6 +91,7 @@
 
 		.goods-item-right {
 			display: flex;
+			flex: 1;
 			flex-flow: column;
 			justify-content: space-between;
 
@@ -66,6 +100,10 @@
 			}
 
 			.goods-info-box {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
 				.goods-price {
 					color: #C00000;
 					font-size: 16px
