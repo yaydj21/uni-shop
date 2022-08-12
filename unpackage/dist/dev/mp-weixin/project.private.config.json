@@ -9,27 +9,6 @@
     "miniprogram": {
       "list": [
         {
-          "name": "pages/cate/cate",
-          "pathName": "pages/cate/cate",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "subpkg/search/search",
-          "pathName": "subpkg/search/search",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "subpkg/goods_list/goods_list",
-          "pathName": "subpkg/goods_list/goods_list",
-          "query": "query=热",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "subpkg/goods_detail/goods_detail",
           "pathName": "subpkg/goods_detail/goods_detail",
           "query": "goods_id=395",
@@ -39,6 +18,13 @@
         {
           "name": "pages/cart/cart",
           "pathName": "pages/cart/cart",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/my/my",
+          "pathName": "pages/my/my",
           "query": "",
           "launchMode": "default",
           "scene": null
